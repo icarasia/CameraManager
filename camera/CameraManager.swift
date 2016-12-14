@@ -144,8 +144,9 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
 				if cameraOutputMode != oldValue {
 					_setupOutputMode(cameraOutputMode, oldCameraOutputMode: oldValue)
 				}
+				
 				_setupMaxZoomScale()
-				//_zoom(0)
+				_zoom(savedZoomScale)
 			}
 		}
 	}
@@ -188,6 +189,7 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
 	fileprivate var zoomScale       = CGFloat(1.0)
 	fileprivate var beginZoomScale  = CGFloat(1.0)
 	fileprivate var maxZoomScale    = CGFloat(1.0)
+	fileprivate var savedZoomScale  = CGFloat(1.0)
 	
 	fileprivate var focusRing: UIView?
 	
@@ -625,6 +627,8 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
 	
 	fileprivate func _zoom(_ scale: CGFloat) {
 		do {
+			savedZoomScale = scale
+			
 			let captureDevice = AVCaptureDevice.devices().first as? AVCaptureDevice
 			try captureDevice?.lockForConfiguration()
 			
