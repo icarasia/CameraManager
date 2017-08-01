@@ -26,7 +26,7 @@ public enum CameraOutputMode {
 }
 
 public enum CameraOutputQuality: Int {
-	case low, medium, high
+	case low, medium, high, preset1280
 }
 
 /// Class for handling iDevices custom camera usage
@@ -981,6 +981,8 @@ open class CameraManager: NSObject, AVCaptureFileOutputRecordingDelegate, UIGest
 				} else {
 					sessionPreset = AVCaptureSessionPresetHigh
 				}
+            case .preset1280:
+                sessionPreset = AVCaptureSessionPreset1280x720
 			}
 			if validCaptureSession.canSetSessionPreset(sessionPreset) {
 				validCaptureSession.beginConfiguration()

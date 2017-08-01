@@ -166,6 +166,8 @@ class ViewController: UIViewController {
     @IBAction func changeCameraQuality(_ sender: UIButton) {
         
         switch (cameraManager.changeQualityMode()) {
+        case .preset1280:
+            sender.setTitle("1280", for: UIControlState())
         case .high:
             sender.setTitle("High", for: UIControlState())
         case .low:
